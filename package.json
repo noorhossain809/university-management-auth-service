@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
-    "src/**/*.ts": "npm run lint:prettier"
+    "src/**/*.ts": "yarn lint:prettier"
   },
   "author": "Noor Hossain",
   "license": "ISC",
