@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import app from './app'
 import config from './config'
+import express, { Application, Request, Response } from 'express'
 
 async function boostrap() {
   try {
