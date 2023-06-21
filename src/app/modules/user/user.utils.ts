@@ -3,6 +3,7 @@ import { User } from './user.model';
 
 const userIdCounter = 0; // Initial user ID counter
 
+// student
 export const findLastStudentId = async (): Promise<string | undefined> => {
   const lastStudent = await User.findOne(
     { role: 'student' },
@@ -26,6 +27,8 @@ export const generatedStudentId = async (
   return incrementId;
 };
 
+// faculty
+
 export const findLastFacultyId = async (): Promise<string | undefined> => {
   const lastFaculty = await User.findOne(
     { role: 'faculty' },
@@ -41,5 +44,41 @@ export const generatedFacultyId = async (): Promise<string> => {
     (await findLastFacultyId()) || (0).toString().padStart(5, '0');
   let incrementedId = (parseInt(currentId) + 1).toString().padStart(5, '0');
   incrementedId = `F-${incrementedId}`;
+  return incrementedId;
+};
+
+// Admin
+// export const findLastAdminId = async (): Promise<string | undefined> => {
+//   const lastAdmin = await User.findOne({ role: 'admin' }, { id: -1, _id: 0 })
+//     .sort({ createdAt: -1 })
+//     .lean();
+
+//   return lastAdmin?.id ? lastAdmin.id.substring(2) : undefined;
+// };
+
+// export const generatedAdminId = async (): Promise<string> => {
+//   const currentId =
+//     (await findLastAdminId()) || (0).toString().padStart(5, '0');
+//   let incrementById = (parseInt(currentId) + 1).toString().padStart(5, '0');
+//   incrementById = `A-${incrementById}`;
+//   return incrementById;
+// };
+
+export const findLastAdminId = async (): Promise<string | undefined> => {
+  const lastFaculty = await User.findOne({ role: 'admin' }, { id: 1, _id: 0 })
+    .sort({
+      createdAt: -1,
+    })
+    .lean();
+
+  return lastFaculty?.id ? lastFaculty.id.substring(2) : undefined;
+};
+
+export const generateAdminId = async (): Promise<string> => {
+  const currentId =
+    (await findLastAdminId()) || (0).toString().padStart(5, '0');
+  let incrementedId = (parseInt(currentId) + 1).toString().padStart(5, '0');
+  incrementedId = `A-${incrementedId}`;
+
   return incrementedId;
 };
