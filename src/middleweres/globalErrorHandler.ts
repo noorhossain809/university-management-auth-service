@@ -7,6 +7,7 @@ import { errorLogger } from '../shared/logger';
 import { Error } from 'mongoose';
 import { ZodError } from 'zod';
 import handleZodError from '../errors/handleZodError';
+import handleCastError from '../errors/handleCastError';
 
 const globalErrorHandler = (
   error: Error.ValidationError,
@@ -32,6 +33,11 @@ const globalErrorHandler = (
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
+  } else if (error?.name === 'CastError') {
+    const simplifiedError = handleCastError(error);
+    statusCode = simplifiedError.StatusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
   } else if (error instanceof ApiError) {
     statusCode = error?.statusCode;
     message = error?.message;
@@ -56,6 +62,5 @@ const globalErrorHandler = (
     errorMessages,
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
-  next();
 };
 export default globalErrorHandler;

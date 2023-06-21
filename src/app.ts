@@ -2,11 +2,9 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 const app: Application = express();
 import cors from 'cors';
 import globalErrorHandler from './middleweres/globalErrorHandler';
-import { UserRoute } from './app/modules/user/user.route';
-import ApiError from './errors/ApiError';
-import { AcademicSemesterRoute } from './app/modules/academicSemester/academicSemester.route';
 import router from './app/routes';
 import { StatusCodes } from 'http-status-codes';
+import { generatedFacultyId } from './app/modules/user/user.utils';
 
 app.use(cors());
 

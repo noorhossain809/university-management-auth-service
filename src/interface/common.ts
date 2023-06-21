@@ -15,6 +15,6 @@ export type IGenericResponse<T> = {
   data: T;
 };
 
-export type IAcademicSemesterFilters = {
+export type IAcademicFilters = {
   searchTerm?: string;
 };
