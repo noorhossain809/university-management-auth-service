@@ -7,6 +7,7 @@ import { StatusCodes } from 'http-status-codes';
 
 const createStudent = catchAsync(async (req: Request, res: Response) => {
   const { student, ...userData } = req.body;
+  console.log(req.cookies, 'cookies');
   const result = await UserService.createStudent(student, userData);
 
   sendResponse<IUser>(res, {

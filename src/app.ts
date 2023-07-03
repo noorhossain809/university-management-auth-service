@@ -5,12 +5,14 @@ import globalErrorHandler from './middleweres/globalErrorHandler';
 import router from './app/routes';
 import { StatusCodes } from 'http-status-codes';
 import { generatedFacultyId } from './app/modules/user/user.utils';
+import cookieParser from 'cookie-parser';
 
 app.use(cors());
 
 // parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/api/v1', router);
 

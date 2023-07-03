@@ -6,7 +6,7 @@ import { IStudent } from '../student/student.interface';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import {
-  generatedAdminId,
+  generateAdminId,
   generatedFacultyId,
   generatedStudentId,
 } from './user.utils';
@@ -16,6 +16,8 @@ import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { IAdmin } from '../admin/admin.interface';
 import { Admin } from '../admin/admin.model';
+import { JwtPayload } from 'jsonwebtoken';
+import { IChangePassword } from '../auth/auth.interface';
 
 const createStudent = async (
   student: IStudent,
@@ -148,6 +150,8 @@ const createAdmin = async (admin: IAdmin, user: IUser) => {
     user.password = config.default_admin_pass as string;
   }
 
+  // hash password
+
   // set role
   user.role = 'admin';
 
@@ -156,7 +160,7 @@ const createAdmin = async (admin: IAdmin, user: IUser) => {
 
   try {
     session.startTransaction();
-    const id = await generatedAdminId();
+    const id = await generateAdminId();
     user.id = id;
     admin.id = id;
 
