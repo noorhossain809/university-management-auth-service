@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import config from '../config';
 import { IGenericErrorMessage } from '../interface/error';
 import handleValidationError from '../errors/handleValidationError';
@@ -9,15 +9,15 @@ import { ZodError } from 'zod';
 import handleZodError from '../errors/handleZodError';
 import handleCastError from '../errors/handleCastError';
 
-const globalErrorHandler = (
-  error: Error.ValidationError,
+const globalErrorHandler: ErrorRequestHandler = (
+  error,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   config.env === 'development'
     ? console.log('globalErrorHandler ~', error)
-    : errorLogger.error('globalErrorHandler ~', error);
+    : console.error('globalErrorHandler ~', error);
 
   let statusCode = 500;
   let message = 'Something went wrong';
