@@ -3,7 +3,6 @@ import config from '../config';
 import { IGenericErrorMessage } from '../interface/error';
 import handleValidationError from '../errors/handleValidationError';
 import ApiError from '../errors/ApiError';
-import { errorLogger } from '../shared/logger';
 import { Error } from 'mongoose';
 import { ZodError } from 'zod';
 import handleZodError from '../errors/handleZodError';
