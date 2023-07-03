@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
-import { AcademicFacultyService } from './academicFaculty.service';
 import sendResponse from '../../../shared/sendResponse';
 import { StatusCodes } from 'http-status-codes';
-import pick from '../../../shared/pick';
-import { paginationFields } from '../../../constains/paginationFields';
 import { AuthService } from './auth.service';
 import config from '../../../config';
 import { IRefreshResponseToken } from './auth.interface';
